@@ -9,9 +9,9 @@ public class Contact {
   private String homePhoneNumber;
   private String contactCity;
 
-  public Contact(String mobilePhoneNumber, String contactCity) {
+  public Contact(String contactName, String mobilePhoneNumber) {
+    setContactName(contactName);
     setMobilePhoneNumber(mobilePhoneNumber);
-    setContactCity(contactCity);
   }
 
   public String getContactName() {
@@ -20,7 +20,7 @@ public class Contact {
 
   public void setContactName(String contactName) {
     if(contactName.isEmpty()) {
-      System.out.println("You must enter this field.");
+      System.out.println("You must enter a valid name. It cannot be empty or null");
     } else {
       this.contactName = contactName;
     }
@@ -31,7 +31,7 @@ public class Contact {
   }
 
   public void setContactEmail(String contactEmail) {
-    this.contactEmail = contactEmail;
+    this.contactEmail = contactEmail.isEmpty() ? null : contactEmail;
   }
 
   public String getMobilePhoneNumber() {
@@ -40,7 +40,7 @@ public class Contact {
 
   public void setMobilePhoneNumber(String mobilePhoneNumber) {
     if(mobilePhoneNumber.isEmpty()) {
-      System.out.println("You must enter this field.");
+      System.out.println("You must enter a valid phone number. It cannot be empty or null");
     } else {
       this.mobilePhoneNumber = mobilePhoneNumber;
     }
@@ -51,7 +51,7 @@ public class Contact {
   }
 
   public void setWorkPhoneNumber(String workPhoneNumber) {
-    this.workPhoneNumber = workPhoneNumber;
+    this.workPhoneNumber = workPhoneNumber.isEmpty() ? null : workPhoneNumber;
   }
 
   public String getHomePhoneNumber() {
@@ -59,7 +59,7 @@ public class Contact {
   }
 
   public void setHomePhoneNumber(String homePhoneNumber) {
-    this.homePhoneNumber = homePhoneNumber;
+    this.homePhoneNumber = homePhoneNumber.isEmpty() ? null : homePhoneNumber;
   }
 
   public String getContactCity() {
@@ -67,7 +67,7 @@ public class Contact {
   }
 
   public void setContactCity(String contactCity) {
-    this.contactCity = contactCity;
+    this.contactCity = contactCity.isEmpty() ? null : contactCity;
   }
 
 }

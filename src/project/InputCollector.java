@@ -22,7 +22,13 @@ public class InputCollector {
       showInputMenu();
       isOptionTurn = false;
       System.out.println(prompt);
-      return Integer.toString(userInputReader.nextInt());
+
+      try {
+        return Integer.toString(userInputReader.nextInt());
+      } catch (Exception exception) {
+        throw new IllegalArgumentException("Invalid Input. "
+            + "Restart the program and enter a number between 1 and 5.");
+      }
     }
     System.out.println(prompt);
     return userInputReader.nextLine();

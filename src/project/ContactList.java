@@ -14,17 +14,18 @@ public class ContactList {
   private List<Contact> populateContactList() {
     List<Contact> populatedContactList = new ArrayList<>();
 
-    Contact stark = new Contact("202-555-0540", "San Francisco");
-    stark.setContactName("Anthony Stark");
+    Contact stark =
+        new Contact("Anthony Stark", "202-555-0540");
     populatedContactList.add(stark);
 
-    Contact morales = new Contact("202-555-0392", "New York");
-    morales.setContactName("Miles Morales");
+    Contact morales =
+        new Contact("Miles Morales", "202-555-0392");
     populatedContactList.add(morales);
 
     return populatedContactList;
   }
 
+  // TODO: flexible String format
   public void getAllContacts() {
     for(int index = 0; index < this.contactList.size(); index++) {
       Contact contact = this.contactList.get(index);
@@ -50,16 +51,36 @@ public class ContactList {
     }
   }
 
-  public void addContact(Contact contact) {
-    this.contactList.add(contact);
-  }
-
   public void removeContact(Contact contact) {
     this.contactList.remove(contact);
+    System.out.println("Successfully removed " + contact.getContactName());
+  }
+
+  public void addContact(Contact contact) {
+    if(validateContact(contact)) {
+      this.contactList.add(contact);
+      System.out.println("Successfully added a new contact!");
+    }
   }
 
   public void updateContact(int indexOfContact, Contact contact) {
     this.contactList.set(indexOfContact, contact);
+    System.out.println("Successfully updated contact!");
+  }
+
+  private boolean validateContact(Contact contact) {
+    for(Contact storedContact : this.contactList) {
+      if (storedContact.getContactName().equals(contact.getContactName())) {
+        throw new IllegalArgumentException("Unable to add contact. "
+            + "You already have a contact with the same name");
+      }
+
+      if(storedContact.getMobilePhoneNumber().equals(contact.getMobilePhoneNumber())) {
+        throw new IllegalArgumentException("Unable to add contact. "
+            + "You already have a contact with the same mobile phone number");
+      }
+    }
+    return true;
   }
 
 }

@@ -32,6 +32,7 @@ public class Driver {
           continue;
 
         case ADD_CONTACT:
+          // TODO: if name is invalid, should enter a name again
           String contactName =
               InputCollector.getInputCollector().getUserInput(INPUT_ENTER_USERNAME);
           String contactEmail =
@@ -45,32 +46,39 @@ public class Driver {
           String city =
               InputCollector.getInputCollector().getUserInput(INPUT_ENTER_CITY_NAME);
 
-          Contact contact = new Contact(mobileNumber, city);
-          contact.setContactName(contactName);
+          Contact contact = new Contact(contactName, mobileNumber);
           contact.setContactEmail(contactEmail);
+          contact.setWorkPhoneNumber(workNumber);
+          contact.setHomePhoneNumber(homeNumber);
+          contact.setContactCity(city);
           contactList.addContact(contact);
           InputCollector.setAsOptionTurn();
           continue;
 
         case REMOVE_CONTACT:
           contactList.getAllContacts();
+          String idRemove =
+              InputCollector.getInputCollector().getUserInput(INPUT_ENTER_CONTACT_ID);
 
-          String idRemove = InputCollector.getInputCollector().getUserInput(INPUT_ENTER_CONTACT_ID);
-          Contact contactToRemove = contactList.getContactById(Integer.parseInt(idRemove));
-
-          if(contactToRemove == null) {
-            System.out.println(String.format("Contact at index %s does not exists.", idRemove));
+          if (!Character.isDigit(idRemove.charAt(0))) {
+            System.out.println("Invalid contact id. You must enter a number");
             InputCollector.setAsOptionTurn();
             continue;
-          }
+          } else {
+            Contact contactToRemove = contactList.getContactById(Integer.parseInt(idRemove));
 
-          contactList.removeContact(contactToRemove);
+            if(contactToRemove == null) {
+              System.out.println(String.format("Contact at index %s does not exists.", idRemove));
+              InputCollector.setAsOptionTurn();
+              continue;
+            }
+            contactList.removeContact(contactToRemove);
+          }
           InputCollector.setAsOptionTurn();
           continue;
 
         case UPDATE_CONTACT:
           contactList.getAllContacts();
-
           String idUpdate = InputCollector.getInputCollector().getUserInput(INPUT_ENTER_CONTACT_ID);
           Contact contactToUpdate = contactList.getContactById(Integer.parseInt(idUpdate));
 
@@ -93,10 +101,12 @@ public class Driver {
           String updatedContactCity =
               InputCollector.getInputCollector().getUserInput(INPUT_ENTER_CITY_NAME);
 
-          Contact updatedContact = new Contact(updatedContactMobileNumber, updatedContactCity);
-          updatedContact.setContactName(updatedContactName);
+          Contact updatedContact =
+              new Contact(updatedContactName, updatedContactMobileNumber);
           updatedContact.setContactEmail(updatedContactEmail);
-
+          updatedContact.setWorkPhoneNumber(updatedContactWorkNumber);
+          updatedContact.setHomePhoneNumber(updatedContactHomeNumber);
+          updatedContact.setContactCity(updatedContactCity);
           contactList.updateContact(Integer.parseInt(idUpdate), updatedContact);
           InputCollector.setAsOptionTurn();
           continue;
