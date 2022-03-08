@@ -25,7 +25,6 @@ public class ContactList {
     return populatedContactList;
   }
 
-  // TODO: flexible String format
   public void getAllContacts() {
     for(int index = 0; index < this.contactList.size(); index++) {
       Contact contact = this.contactList.get(index);
