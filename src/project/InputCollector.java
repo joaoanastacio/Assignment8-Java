@@ -10,6 +10,16 @@ public class InputCollector {
 
   }
 
+  private static void showInputMenu() {
+    System.out.println("\n+====== Contact App =====+");
+    System.out.println("| [1] List all contacts  |");
+    System.out.println("| [2] Add new contact    |");
+    System.out.println("| [3] Remove contact     |");
+    System.out.println("| [4] Update contact     |");
+    System.out.println("| [5] Quit program       |");
+    System.out.println("+=========================+");
+  }
+
   protected static String getUserInput(String prompt) {
     Scanner userInputReader = new Scanner(System.in);
 
@@ -27,16 +37,6 @@ public class InputCollector {
     }
     System.out.println(prompt);
     return userInputReader.nextLine();
-  }
-
-  private static void showInputMenu() {
-    System.out.println("\n+====== Contact App =====+");
-    System.out.println("| [1] List all contacts  |");
-    System.out.println("| [2] Add new contact    |");
-    System.out.println("| [3] Remove contact     |");
-    System.out.println("| [4] Update contact     |");
-    System.out.println("| [5] Quit program       |");
-    System.out.println("+=========================+");
   }
 
   protected static void setAsOptionTurn() {
