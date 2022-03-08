@@ -23,7 +23,7 @@ public class Driver {
     boolean stillRunning = true;
 
     while (stillRunning) {
-      String input = InputCollector.getInputCollector().getUserInput(INPUT_ENTER_OPTION);
+      String input = InputCollector.getUserInput(INPUT_ENTER_OPTION);
 
       switch (input) {
         case LIST_ALL_CONTACTS:
@@ -34,28 +34,22 @@ public class Driver {
         case ADD_CONTACT:
           Contact contact = new Contact();
 
-          String contactName =
-              InputCollector.getInputCollector().getUserInput(INPUT_ENTER_USERNAME);
+          String contactName = InputCollector.getUserInput(INPUT_ENTER_USERNAME);
           contact.setContactName(contactName);
 
-          String contactEmail =
-              InputCollector.getInputCollector().getUserInput(INPUT_ENTER_EMAIL);
+          String contactEmail = InputCollector.getUserInput(INPUT_ENTER_EMAIL);
           contact.setContactEmail(contactEmail);
 
-          String mobileNumber =
-              InputCollector.getInputCollector().getUserInput(INPUT_ENTER_MOBILE_NUMBER);
+          String mobileNumber = InputCollector.getUserInput(INPUT_ENTER_MOBILE_NUMBER);
           contact.setMobilePhoneNumber(mobileNumber);
 
-          String workNumber =
-              InputCollector.getInputCollector().getUserInput(INPUT_ENTER_WORK_NUMBER);
+          String workNumber = InputCollector.getUserInput(INPUT_ENTER_WORK_NUMBER);
           contact.setWorkPhoneNumber(workNumber);
 
-          String homeNumber =
-              InputCollector.getInputCollector().getUserInput(INPUT_ENTER_HOME_NUMBER);
+          String homeNumber = InputCollector.getUserInput(INPUT_ENTER_HOME_NUMBER);
           contact.setHomePhoneNumber(homeNumber);
 
-          String city =
-              InputCollector.getInputCollector().getUserInput(INPUT_ENTER_CITY_NAME);
+          String city = InputCollector.getUserInput(INPUT_ENTER_CITY_NAME);
           contact.setContactCity(city);
 
           contactList.addContact(contact);
@@ -65,17 +59,17 @@ public class Driver {
         case REMOVE_CONTACT:
           contactList.getAllContacts();
           String idRemove =
-              InputCollector.getInputCollector().getUserInput(INPUT_ENTER_CONTACT_ID);
+              InputCollector.getUserInput(INPUT_ENTER_CONTACT_ID);
 
           if (!Character.isDigit(idRemove.charAt(0))) {
-            System.out.println("Invalid contact id. You must enter a number");
+            System.err.println("Invalid contact id. You must enter a number");
             InputCollector.setAsOptionTurn();
             continue;
           } else {
             Contact contactToRemove = contactList.getContactById(Integer.parseInt(idRemove));
 
             if(contactToRemove == null) {
-              System.out.println(String.format("Contact at index %s does not exists.", idRemove));
+              System.err.printf("Contact at index %s does not exists.%n", idRemove);
               InputCollector.setAsOptionTurn();
               continue;
             }
@@ -86,36 +80,42 @@ public class Driver {
 
         case UPDATE_CONTACT:
           contactList.getAllContacts();
-          String idUpdate = InputCollector.getInputCollector().getUserInput(INPUT_ENTER_CONTACT_ID);
+          String idUpdate = InputCollector.getUserInput(INPUT_ENTER_CONTACT_ID);
           Contact contactToUpdate = contactList.getContactById(Integer.parseInt(idUpdate));
 
-          if(contactToUpdate == null) {
-            System.out.println(String.format("Contact at index %s does not exists.", idUpdate));
+          if(!Character.isDigit(idUpdate.charAt(0))) {
+            System.err.println("Invalid contact id. You must enter a number");
             InputCollector.setAsOptionTurn();
             continue;
+          } else {
+            if(contactToUpdate == null) {
+              System.err.printf("Contact at index %s does not exists.%n", idUpdate);
+              InputCollector.setAsOptionTurn();
+              continue;
+            }
+
+            Contact updatedContact = new Contact();
+            String updatedContactName = InputCollector.getUserInput(INPUT_ENTER_USERNAME);
+            updatedContact.setContactName(updatedContactName);
+
+            String updatedContactEmail = InputCollector.getUserInput(INPUT_ENTER_EMAIL);
+            updatedContact.setContactEmail(updatedContactEmail);
+
+            String updatedContactMobileNumber = InputCollector.getUserInput(INPUT_ENTER_MOBILE_NUMBER);
+            updatedContact.setMobilePhoneNumber(updatedContactMobileNumber);
+
+            String updatedContactWorkNumber = InputCollector.getUserInput(INPUT_ENTER_WORK_NUMBER);
+            updatedContact.setWorkPhoneNumber(updatedContactWorkNumber);
+
+            String updatedContactHomeNumber = InputCollector.getUserInput(INPUT_ENTER_HOME_NUMBER);
+            updatedContact.setHomePhoneNumber(updatedContactHomeNumber);
+
+            String updatedContactCity = InputCollector.getUserInput(INPUT_ENTER_CITY_NAME);
+            updatedContact.setContactCity(updatedContactCity);
+
+            contactList.updateContact(Integer.parseInt(idUpdate), updatedContact);
           }
 
-          // TODO: if name is invalid, should enter a name again
-          String updatedContactName =
-              InputCollector.getInputCollector().getUserInput(INPUT_ENTER_USERNAME);
-          String updatedContactEmail =
-              InputCollector.getInputCollector().getUserInput(INPUT_ENTER_EMAIL);
-          String updatedContactMobileNumber =
-              InputCollector.getInputCollector().getUserInput(INPUT_ENTER_MOBILE_NUMBER);
-          String updatedContactWorkNumber =
-              InputCollector.getInputCollector().getUserInput(INPUT_ENTER_WORK_NUMBER);
-          String updatedContactHomeNumber =
-              InputCollector.getInputCollector().getUserInput(INPUT_ENTER_HOME_NUMBER);
-          String updatedContactCity =
-              InputCollector.getInputCollector().getUserInput(INPUT_ENTER_CITY_NAME);
-
-          Contact updatedContact =
-              new Contact(updatedContactName, updatedContactMobileNumber);
-          updatedContact.setContactEmail(updatedContactEmail);
-          updatedContact.setWorkPhoneNumber(updatedContactWorkNumber);
-          updatedContact.setHomePhoneNumber(updatedContactHomeNumber);
-          updatedContact.setContactCity(updatedContactCity);
-          contactList.updateContact(Integer.parseInt(idUpdate), updatedContact);
           InputCollector.setAsOptionTurn();
           continue;
 
@@ -125,8 +125,7 @@ public class Driver {
           break;
 
         default:
-          System.out.println("Invalid Input. Enter a number between 1 and 5.");
-          continue;
+          System.err.println("Invalid Input. Enter a number between 1 and 5.");
       }
     }
   }

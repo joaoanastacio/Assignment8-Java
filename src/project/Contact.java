@@ -25,7 +25,7 @@ public class Contact {
     while (!isValidInput) {
       if(contactName.isEmpty()) {
         System.err.println("You must enter a valid name. It cannot be empty or null");
-        contactName = InputCollector.getInputCollector().getUserInput("Enter a name: ");
+        contactName = InputCollector.getUserInput("Enter a name: ");
       } else {
         this.contactName = contactName;
         isValidInput = true;
@@ -52,7 +52,7 @@ public class Contact {
       if(mobilePhoneNumber.isEmpty()) {
         System.err.println("You must enter a valid mobile number. It cannot be empty or null");
         mobilePhoneNumber =
-            InputCollector.getInputCollector().getUserInput("Enter a mobile number: ");
+            InputCollector.getUserInput("Enter a mobile number: ");
       } else {
         this.mobilePhoneNumber = mobilePhoneNumber;
         isValidInput = true;

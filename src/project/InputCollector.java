@@ -4,15 +4,10 @@ import java.util.Scanner;
 
 public class InputCollector {
 
-  private static InputCollector inputCollector = new InputCollector();
   private static boolean isOptionTurn = true;
 
   private InputCollector() {
 
-  }
-
-  public static InputCollector getInputCollector() {
-    return inputCollector;
   }
 
   protected static String getUserInput(String prompt) {
