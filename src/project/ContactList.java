@@ -28,7 +28,7 @@ public class ContactList {
   }
 
   public Contact getContactById(int contactId) {
-    if (contactId <= this.contactList.size()) {
+    if (contactId < this.contactList.size()) {
       return this.contactList.get(contactId);
     } else {
       return null;
