@@ -14,13 +14,15 @@ public class ContactList {
   private List<Contact> populateContactList() {
     List<Contact> populatedContactList = new ArrayList<>();
 
-    Contact stark =
-        new Contact("Anthony Stark", "202-555-0540");
+    Contact stark = new Contact();
+    stark.setContactName("Anthony Stark");
+    stark.setMobilePhoneNumber("202-555-0540");
     stark.setContactCity("Malibu");
     populatedContactList.add(stark);
 
-    Contact morales =
-        new Contact("Miles Morales", "202-555-0392");
+    Contact morales = new Contact();
+    morales.setContactName("Miles Morales");
+    morales.setMobilePhoneNumber("202-555-0392");
     morales.setContactCity("New York");
     populatedContactList.add(morales);
 

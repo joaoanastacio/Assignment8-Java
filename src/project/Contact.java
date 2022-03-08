@@ -9,11 +9,6 @@ public class Contact {
   private String homePhoneNumber;
   private String contactCity;
 
-  public Contact(String contactName, String mobilePhoneNumber) {
-    setContactName(contactName);
-    setMobilePhoneNumber(mobilePhoneNumber);
-  }
-
   public Contact() {}
 
   public String getContactName() {
