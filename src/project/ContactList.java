@@ -16,13 +16,23 @@ public class ContactList {
 
     Contact stark =
         new Contact("Anthony Stark", "202-555-0540");
+    stark.setContactCity("Malibu");
     populatedContactList.add(stark);
 
     Contact morales =
         new Contact("Miles Morales", "202-555-0392");
+    morales.setContactCity("New York");
     populatedContactList.add(morales);
 
     return populatedContactList;
+  }
+
+  public Contact getContactById(int contactId) {
+    if (contactId <= this.contactList.size()) {
+      return this.contactList.get(contactId);
+    } else {
+      return null;
+    }
   }
 
   public void getAllContacts() {
@@ -39,14 +49,6 @@ public class ContactList {
           contact.getContactEmail(),
           contact.getContactCity());
       System.out.println(formattedContact);
-    }
-  }
-
-  public Contact getContactById(int contactId) {
-    if (contactId <= this.contactList.size()) {
-      return this.contactList.get(contactId);
-    } else {
-      return null;
     }
   }
 

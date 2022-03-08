@@ -20,7 +20,7 @@ public class Contact {
 
   public void setContactName(String contactName) {
     if(contactName.isEmpty()) {
-      System.out.println("You must enter a valid name. It cannot be empty or null");
+      throw new IllegalArgumentException("You must enter a valid name. It cannot be empty or null");
     } else {
       this.contactName = contactName;
     }
@@ -40,7 +40,8 @@ public class Contact {
 
   public void setMobilePhoneNumber(String mobilePhoneNumber) {
     if(mobilePhoneNumber.isEmpty()) {
-      System.out.println("You must enter a valid phone number. It cannot be empty or null");
+      throw new IllegalArgumentException("You must enter a valid mobile number. "
+          + "It cannot be empty or null");
     } else {
       this.mobilePhoneNumber = mobilePhoneNumber;
     }

@@ -88,6 +88,7 @@ public class Driver {
             continue;
           }
 
+          // TODO: if name is invalid, should enter a name again
           String updatedContactName =
               InputCollector.getInputCollector().getUserInput(INPUT_ENTER_USERNAME);
           String updatedContactEmail =
