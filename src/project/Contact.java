@@ -14,15 +14,22 @@ public class Contact {
     setMobilePhoneNumber(mobilePhoneNumber);
   }
 
+  public Contact() {}
+
   public String getContactName() {
     return contactName;
   }
 
   public void setContactName(String contactName) {
-    if(contactName.isEmpty()) {
-      throw new IllegalArgumentException("You must enter a valid name. It cannot be empty or null");
-    } else {
-      this.contactName = contactName;
+    boolean isValidInput = false;
+    while (!isValidInput) {
+      if(contactName.isEmpty()) {
+        System.err.println("You must enter a valid name. It cannot be empty or null");
+        contactName = InputCollector.getInputCollector().getUserInput("Enter a name: ");
+      } else {
+        this.contactName = contactName;
+        isValidInput = true;
+      }
     }
   }
 
@@ -39,11 +46,17 @@ public class Contact {
   }
 
   public void setMobilePhoneNumber(String mobilePhoneNumber) {
-    if(mobilePhoneNumber.isEmpty()) {
-      throw new IllegalArgumentException("You must enter a valid mobile number. "
-          + "It cannot be empty or null");
-    } else {
-      this.mobilePhoneNumber = mobilePhoneNumber;
+    boolean isValidInput = false;
+
+    while (!isValidInput) {
+      if(mobilePhoneNumber.isEmpty()) {
+        System.err.println("You must enter a valid mobile number. It cannot be empty or null");
+        mobilePhoneNumber =
+            InputCollector.getInputCollector().getUserInput("Enter a mobile number: ");
+      } else {
+        this.mobilePhoneNumber = mobilePhoneNumber;
+        isValidInput = true;
+      }
     }
   }
 

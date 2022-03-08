@@ -32,25 +32,32 @@ public class Driver {
           continue;
 
         case ADD_CONTACT:
-          // TODO: if name is invalid, should enter a name again
+          Contact contact = new Contact();
+
           String contactName =
               InputCollector.getInputCollector().getUserInput(INPUT_ENTER_USERNAME);
+          contact.setContactName(contactName);
+
           String contactEmail =
               InputCollector.getInputCollector().getUserInput(INPUT_ENTER_EMAIL);
+          contact.setContactEmail(contactEmail);
+
           String mobileNumber =
               InputCollector.getInputCollector().getUserInput(INPUT_ENTER_MOBILE_NUMBER);
+          contact.setMobilePhoneNumber(mobileNumber);
+
           String workNumber =
               InputCollector.getInputCollector().getUserInput(INPUT_ENTER_WORK_NUMBER);
+          contact.setWorkPhoneNumber(workNumber);
+
           String homeNumber =
               InputCollector.getInputCollector().getUserInput(INPUT_ENTER_HOME_NUMBER);
+          contact.setHomePhoneNumber(homeNumber);
+
           String city =
               InputCollector.getInputCollector().getUserInput(INPUT_ENTER_CITY_NAME);
-
-          Contact contact = new Contact(contactName, mobileNumber);
-          contact.setContactEmail(contactEmail);
-          contact.setWorkPhoneNumber(workNumber);
-          contact.setHomePhoneNumber(homeNumber);
           contact.setContactCity(city);
+
           contactList.addContact(contact);
           InputCollector.setAsOptionTurn();
           continue;
